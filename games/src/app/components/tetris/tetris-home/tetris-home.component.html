@@ -4,7 +4,17 @@
       class="text-center p-3 border-round-sm font-bold"
       id="container-tetris"
     >
-      6
+      {{ interval }}
+      <ng-container *ngFor="let raw of dynamicBoard">
+        <div>
+          <ng-container *ngFor="let squareValue of raw">
+            <app-square *ngIf="squareValue" [isFull]="true"></app-square>
+            <app-square *ngIf="!squareValue" [isFull]="false"></app-square>
+          </ng-container>
+        </div>
+      </ng-container>
+      <!-- {{ fallingItem | json }}
+      {{ dynamicBoard | json }} -->
     </div>
   </div>
 </div>

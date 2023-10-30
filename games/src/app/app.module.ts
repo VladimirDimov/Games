@@ -7,9 +7,15 @@ import { TetrisHomeComponent } from './components/tetris/tetris-home/tetris-home
 import { RouterModule } from '@angular/router';
 import { routes } from './routes';
 import { HeaderComponent } from './components/header/header.component';
+import { SquareComponent } from './components/tetris/square/square.component';
 
 @NgModule({
-  declarations: [AppComponent, TetrisHomeComponent, HeaderComponent],
+  declarations: [
+    AppComponent,
+    TetrisHomeComponent,
+    HeaderComponent,
+    SquareComponent,
+  ],
   imports: [BrowserModule, AppRoutingModule, RouterModule.forRoot(routes)],
   providers: [],
   bootstrap: [AppComponent],
