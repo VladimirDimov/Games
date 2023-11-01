@@ -35,6 +35,8 @@ export class DynamicHomeComponent implements OnInit, AfterViewInit {
   }
 
   addTwo() {
-    this.dynamicContainer?.createComponent(DynamicTwoComponent);
+    let addedComponent =
+      this.dynamicContainer?.createComponent(ClosableComponent);
+    addedComponent!.instance.childComponent = DynamicTwoComponent;
   }
 }
