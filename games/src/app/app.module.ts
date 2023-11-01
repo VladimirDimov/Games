@@ -8,6 +8,10 @@ import { RouterModule } from '@angular/router';
 import { routes } from './routes';
 import { HeaderComponent } from './components/header/header.component';
 import { SquareComponent } from './components/tetris/square/square.component';
+import { DynamicHomeComponent } from './components/dynamic/dynamic-home/dynamic-home.component';
+import { DynamicOneComponent } from './components/dynamic/dynamic-one/dynamic-one.component';
+import { DynamicTwoComponent } from './components/dynamic/dynamic-two/dynamic-two.component';
+import { ClosableComponent } from './components/dynamic/closable/closable.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +19,10 @@ import { SquareComponent } from './components/tetris/square/square.component';
     TetrisHomeComponent,
     HeaderComponent,
     SquareComponent,
+    DynamicHomeComponent,
+    DynamicOneComponent,
+    DynamicTwoComponent,
+    ClosableComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, RouterModule.forRoot(routes)],
   providers: [],

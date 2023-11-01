@@ -47,7 +47,11 @@ export class TetrisHomeComponent implements OnInit {
           break;
 
         case 'ArrowDown':
-          this.interval = 100;
+          this.interval = settings.tetris.interval * 0.01;
+          break;
+
+        case 'ArrowUp':
+          this.fallingItem?.rotate();
           break;
 
         default:
@@ -88,6 +92,9 @@ export class TetrisHomeComponent implements OnInit {
             );
           }
         }),
+        tap(() => {
+          this.updateRows();
+        }),
         tap((i) => {
           this.dynamicBoard = this.getCurrentBoard();
         }),
@@ -96,31 +103,50 @@ export class TetrisHomeComponent implements OnInit {
       .subscribe((x) => {});
   }
 
+  updateRows() {
+    let rowIndexesToClear: number[] = [];
+
+    for (let rowIndex = 0; rowIndex < this.staticBoard.length; rowIndex++) {
+      const row = this.staticBoard[rowIndex];
+      if (row.indexOf(0) === -1) rowIndexesToClear.push(rowIndex);
+    }
+
+    for (let rowIndex of rowIndexesToClear) {
+      this.staticBoard.splice(rowIndex, 1);
+      this.staticBoard.unshift(Array(settings.tetris.board.width).fill(0));
+    }
+  }
+
   private isHit(): boolean {
     if (!this.fallingItem) return false;
 
-    const fallingItemHeight = this.fallingItem?.item.length;
-    const fallingItemMaxTop = this.fallingItem?.top + fallingItemHeight;
-    const itemBottomRow =
-      this.fallingItem.item[this.fallingItem.item.length - 1];
+    if (
+      this.fallingItem.top + this.fallingItem.item.length ===
+      this.staticBoard.length
+    )
+      return true;
 
-    if (fallingItemMaxTop === settings.tetris.board.height) return true;
+    for (
+      let vLocalIndex = 0;
+      vLocalIndex < this.fallingItem.item.length;
+      vLocalIndex++
+    ) {
+      const row = this.fallingItem.item[vLocalIndex];
 
-    let isHit = false;
+      for (let hLocalIndex = 0; hLocalIndex < row.length; hLocalIndex++) {
+        const element = row[hLocalIndex];
+        if (element === 0) continue;
 
-    itemBottomRow.forEach((bottomSquare, hLocal) => {
-      if (!this.fallingItem) return;
+        const isHitAnotherItem =
+          this.staticBoard[this.fallingItem.top + vLocalIndex + 1][
+            this.fallingItem.left + hLocalIndex
+          ] > 0;
 
-      const hGlobal = hLocal + this.fallingItem.left;
-      const vGlobal = this.fallingItem.top + this.fallingItem.item.length;
-
-      if (this.staticBoard[vGlobal][hGlobal] == 1) {
-        isHit = true;
-        return;
+        if (isHitAnotherItem) return true;
       }
-    });
+    }
 
-    return isHit;
+    return false;
   }
 
   private getCurrentBoard(): number[][] {
@@ -131,7 +157,9 @@ export class TetrisHomeComponent implements OnInit {
         const vGlobalIndex = (this.fallingItem?.top ?? 0) + vLocalIndex;
         const hGlobalIndex = (this.fallingItem?.left ?? 0) + hLocalIndex;
 
-        board[vGlobalIndex][hGlobalIndex] = itemSquare;
+        board[vGlobalIndex][hGlobalIndex] = board[vGlobalIndex][hGlobalIndex]
+          ? board[vGlobalIndex][hGlobalIndex]
+          : itemSquare;
       });
     });
 

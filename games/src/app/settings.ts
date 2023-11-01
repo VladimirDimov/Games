@@ -11,7 +11,7 @@ export interface Settings {
 export const settings: Settings = {
   tetris: {
     board: {
-      width: 18,
+      width: 6,
       height: 18,
     },
     interval: 1000,
