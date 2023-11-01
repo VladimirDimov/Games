@@ -12,6 +12,8 @@ import { DynamicHomeComponent } from './components/dynamic/dynamic-home/dynamic-
 import { DynamicOneComponent } from './components/dynamic/dynamic-one/dynamic-one.component';
 import { DynamicTwoComponent } from './components/dynamic/dynamic-two/dynamic-two.component';
 import { ClosableComponent } from './components/dynamic/closable/closable.component';
+import { RxjsHomeComponent } from './components/rxjs-home/rxjs-home.component';
+import { CombineLatestPlayComponent } from './components/rxjs-home/combine-latest-play/combine-latest-play.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,8 @@ import { ClosableComponent } from './components/dynamic/closable/closable.compon
     DynamicOneComponent,
     DynamicTwoComponent,
     ClosableComponent,
+    RxjsHomeComponent,
+    CombineLatestPlayComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, RouterModule.forRoot(routes)],
   providers: [],
