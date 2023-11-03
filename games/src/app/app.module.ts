@@ -14,6 +14,7 @@ import { DynamicTwoComponent } from './components/dynamic/dynamic-two/dynamic-tw
 import { ClosableComponent } from './components/dynamic/closable/closable.component';
 import { RxjsHomeComponent } from './components/rxjs-home/rxjs-home.component';
 import { CombineLatestPlayComponent } from './components/rxjs-home/combine-latest-play/combine-latest-play.component';
+import { SwitchMapPlayComponent } from './components/rxjs-home/switch-map-play/switch-map-play.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { CombineLatestPlayComponent } from './components/rxjs-home/combine-lates
     ClosableComponent,
     RxjsHomeComponent,
     CombineLatestPlayComponent,
+    SwitchMapPlayComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, RouterModule.forRoot(routes)],
   providers: [],
